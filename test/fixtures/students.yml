@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  firstname: First1
+  lastname: Last1
+  grade: 2
+
+two:
+  firstname: First2
+  lastname: Last2
+  grade: 4

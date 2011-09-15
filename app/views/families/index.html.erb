@@ -1,0 +1,25 @@
+
+<h1>Families</h1>
+<%= link_to 'New Student', new_student_path %>
+
+<p>
+  <b>Selected:</b>
+  <a href="#" id="CreateEmail">Create Email</a> -
+  <a href="#" id="CreatePairings">Create Pairings</a>
+</p>
+
+<div class="GroupLegend">
+  <b>Groups: </b>
+  <% Group.all.each do |group| %>
+      <input type="checkbox" class="GroupSelect" data-group-id="<%= group.id %>" <%= @selected_groups.include?(group) ? "checked='checked'" : '' %> />
+      <%= render :partial => 'groups/group', :locals => { :group => group } %>
+  <% end %>  
+</div>
+
+<h2>Active Students</h2>
+<%= render(:partial => 'students', :locals => {:students => @active_students, :active => true}) %>
+
+<h2>Inactive Students</h2>
+<%= render(:partial => 'students', :locals => {:students => @inactive_students, :active => false}) %>
+
+

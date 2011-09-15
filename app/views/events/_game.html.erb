@@ -1,0 +1,29 @@
+
+<% 
+	@student_select_list = [["- Players -", 0]]
+	@students.each { |s| @student_select_list << [s.fullname, s.id] }
+	@rating_select_list =	[['WIN', 1], ['DRAW', 0], ['LOSS', -1]]
+%>
+
+<%= form_for(@game, :url => { :controller => 'events', :action => 'create_game', :id => @event.id }) do |f| %>
+<tr id="game-<%= @game.id? ? "new" : @game.id %>">
+	<td>
+	  <div class="field">
+			<%= f.select :student1, options_for_select(@student_select_list, 
+							@game.player1.nil? ? 0 : @game.player1.student.id) %>
+	  </div>
+	</td>
+	<td>
+		<%= f.select :result, options_for_select(@rating_select_list, @game.result) %>
+	</td>
+	<td>
+	  <div class="field">
+			<%= f.select :student2, options_for_select(@student_select_list, 
+							@game.player2.nil? ? 0 : @game.player2.student.id) %>
+	  </div>
+	</td>
+	<td>
+		<%= f.submit %>
+	</td>
+</tr>
+<% end %>

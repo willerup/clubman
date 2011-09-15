@@ -1,0 +1,62 @@
+
+<h2>Event: <%= @event.name %></h2>
+
+<% if @event.closed %>
+  <p>Event is closed (no changes can be made)</p>
+<% else %>
+	<p>Event is open (<a href="<%= edit_event_path %>">edit</a>)</p>
+<% end %>
+
+<p>Date: <b><%= @event.date %></b></p>
+	
+	<% gameColumns = @event.maxGames %>
+    <% if !@event.closed %>
+	    <a href="/events/update_ratings/<%= @event.id %>">update ratings</a>
+    <% end %>
+
+    <table id="EventTable" class="tablesorter">
+		<thead>
+			<tr>
+              <th>Name</th>
+              <th>Current Rating</th>
+				<th>Rating Before</th>
+				<th>
+					Rating Points 
+				</th>
+				<% gameColumns.times do |i| %>
+					<th>Game <%= i + 1%></th>
+				<% end %>
+				<th>Points</th>
+			</tr>
+		<thead>
+		<tbody>
+	<% @event.players.each do |player| %>
+		  <tr>
+		    <td><%= player.student.fullname %></td>
+            <td class="center"><%= player.student.rating %></td>
+            <td class="center"><%= player.rating %></td>
+				<td class="center">
+					<%= player.delta == nil ? "-" : player.delta %>
+				</td>
+				<% points = 0 %>
+				<% gameColumns.times do |i| %>
+					<td>
+						<% if player.games.size > i %>
+							<% 
+								game = player.games[i]
+							  result = game.playerResultAsString(player) 
+								points += result == "win" ? 1 : result == "draw" ? 0.5 : 0
+							%>
+							<%= result %>
+							vs
+							<%= game.otherPlayer(player).student.fullname %>
+						<% end %>
+					</td>
+				<% end %>
+				<td class="center">
+					<%= player.games.size > 0 ? points : "" %>
+				</td>
+		  </tr>
+	<% end %>
+		</tbody>
+	</table>

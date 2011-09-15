@@ -1,0 +1,26 @@
+<table id="<%= active ? "active" : "inactive" %>" class="tablesorter StudentList">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Grade</th>
+	<th>Rating</th>
+	<th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% students.each do |student| %>
+      <% group_styles = student.groups.map { |g| "StudentGroup-#{g.id}" } %>
+      <tr data-student-id="<%= student.id %>" class="<%= student.active ? "active selected" : "inactive" %> <%= group_styles.join(' ') %> ">
+        <td><%= link_to student.fullname, student %></td>
+        <td><%= student.readable_grade %></td>
+        <td>
+          <%= student.current_rating ? student.current_player.date.strftime('%Y-%m-%d') : "" %>
+        </td>
+        <td>
+          <%= link_to 'remove', student, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

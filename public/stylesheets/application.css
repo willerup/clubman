@@ -1,0 +1,174 @@
+
+/* -------------------- Header ------------------- */
+
+body {
+    font-family: Verdana,Arial,serif;
+}
+
+#logo {
+    margin-bottom: 10px;
+}
+
+#logo img {
+    float:left;
+}
+
+#logo h1 {
+    font-size: 1.2em;
+    margin: 5px 0 0 10px;
+    float:left;
+}
+
+h1 {
+    font-size: 1.2em;
+}
+
+
+/* --------------------- Tabs -------------------- */
+
+#user_nav {
+  float:right;
+  font-size: 0.8em;
+}
+
+
+#tabs {
+  clear:both;
+  border-bottom: 2px solid #eee;
+}
+
+
+#tabs li {
+  display: block;
+  float: left;
+  margin: 0 5px 0 5px;
+  padding: 5px;
+  border-radius: 5px 5px 0 0;
+}
+
+
+.AdminTab {
+    background-color:#ecc;
+}
+
+
+.CoachTab {
+    background-color:#cce;
+}
+
+
+.UserTab {
+    background-color:#cec;
+}
+
+
+.TabSelected {
+    font-weight: bold;
+}
+
+
+#tabs a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+
+.clear {
+  clear: both;
+  height: 0;
+}
+
+
+/* --------------------- Main -------------------- */
+
+#main {
+  clear: both;
+}
+
+
+#GroupSelector li {
+  display: inline;
+  list-style: none;
+  padding-left: 10px;
+}
+
+
+.center {
+  text-align: center;
+}
+
+
+.EventHeader {
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  color: blue;
+}
+
+
+.result {
+  font-weight: bold;
+}
+
+
+.GroupLegend span {
+    float:left;
+}
+
+
+.groupIcon {
+  background-color: gray;
+}
+
+
+.Yellow .groupIcon {
+  background-color: yellow;
+}
+
+
+.Red .groupIcon {
+  background-color: red;
+}
+
+
+.Orange .groupIcon {
+  background-color: orange;
+}
+
+
+.Green .groupIcon {
+  background-color: green;
+}
+
+
+.Blue .groupIcon {
+  background-color: blue;
+}
+
+
+.GroupSelect {
+    float:left;
+    margin-left: 20px;
+}
+
+
+.selection {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: transparent url("../images/unchecked.png") no-repeat;
+    cursor: pointer;
+}
+
+
+.emails {
+    font-size: 0.5em;
+}
+
+
+.selected .selection {
+    background-image: url("../images/checked.png");
+}
+
+

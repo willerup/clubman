@@ -1,0 +1,36 @@
+<h1>Listing clubs</h1>
+
+<table class="tablesorter">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Token</th>
+    <th>Users</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @clubs.each do |club| %>
+      <tr>
+        <td><%= club.name %></td>
+        <td><%= club.token %></td>
+        <td>
+          <ul>
+            <% club.users.each do |user| %>
+                <li><%= link_to user.login, user_path(user) %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
+          <%= link_to 'Show', club %>
+          <%= link_to 'Edit', edit_club_path(club) %>
+          <%= link_to 'Destroy', club, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'New Club', new_club_path %>
+</p>

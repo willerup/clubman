@@ -1,0 +1,69 @@
+<%= form_for(@event) do |f| %>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+          <ul>
+            <% @event.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+		<%= f.hidden_field :term_id %>
+
+    <div class="field">
+      <%= f.label :date %>
+      <br/>
+      <%= f.text_field :date %>
+    </div>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :closed %>
+      <%= f.check_box :closed, :class => "ClosedWarning" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Win</th>
+    <th></th>
+    <th>Lose</th>
+    <td></td>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @event.games.each do |game| %>
+      <tr id="game-<%= game.id %>" data-game-id="<%= game.id %>" class="game">
+        <td>
+          <%= game.player1.student.fullname %>
+        </td>
+        <td class="center">
+          <span class="result"><%= game.resultAsString %></span>
+        </td>
+        <td>
+          <%= game.player2.student.fullname %>
+        </td>
+        <td>
+          <a href="#" class="removeGame"><img src="/icons/cross.png"></a>
+        </td>
+      </tr>
+  <% end %>
+
+  <%= render :partial => "game" %>
+
+  </tbody>
+</table>

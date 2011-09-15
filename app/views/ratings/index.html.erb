@@ -1,0 +1,27 @@
+<h1>Ratings</h1>
+
+<table id="StudentRatings" class="tablesorter">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Grade</th>
+    <th>Current Rating</th>
+    <th>Difference (Last)</th>
+    <th>Difference (Year)</th>
+    <th>Date of Rating</th>
+   </tr>
+  <thead>
+  <tbody>
+  <% @students.each do |student| %>
+      <tr>
+        <td><%= student.fullname %></td>
+        <td class="center"><%= student.readable_grade %></td>
+        <td class="center"><%= student.current_rating_as_string %></td>
+        <td class="center"><%= student.delta_rating_latest %></td>
+        <td class="center"><%= student.delta_rating_year %></td>
+        <td class="center"><%= student.current_rating ? student.current_player.date.strftime('%Y-%m-%d') : "" %></td>
+       </tr>
+  <% end %>
+  </tbody>
+</table>
+	

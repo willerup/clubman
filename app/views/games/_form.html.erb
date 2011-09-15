@@ -1,0 +1,46 @@
+
+<% 
+	@player_select_list = [["- Players -", 0]]
+	@players.each { |p| @player_select_list << [p.student.fullname, p.id] }
+%>
+
+<p>
+	Event: 
+	<b><%= @game.event.name %></b>
+</p>
+
+<%= form_for(@game) do |f| %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% @game.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<input type="hidden" name="game[event_id]" value="<%= @game.event.id %>" />
+
+  <div class="field">
+    <%= f.label :player1 %><br />
+		<%= f.select :player1_id, options_for_select(@player_select_list, @game.player1.id) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :player2 %><br />
+		<%= f.select :player2_id, options_for_select(@player_select_list, 
+						@game.player2 == nil ? 0 : @game.player2.id) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :result %><br />
+    <%= f.text_field :result %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

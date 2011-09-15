@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  debit_id: 1
+  credit_id: 1
+  description: MyString
+  date: 2010-11-08 22:58:31
+  amount: 1
+
+two:
+  debit_id: 1
+  credit_id: 1
+  description: MyString
+  date: 2010-11-08 22:58:31
+  amount: 1

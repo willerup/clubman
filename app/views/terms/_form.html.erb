@@ -1,0 +1,29 @@
+<%= form_for(@term) do |f| %>
+  <% if @term.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@term.errors.count, "error") %> prohibited this term from being saved:</h2>
+
+      <ul>
+      <% @term.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<%= f.hidden_field :club_id %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+	<div class="field">
+		<%= label_tag :start_date %>
+		<%= text_field_tag :start_date, @date %>
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

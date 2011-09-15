@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @student.fullname %>
+  (Grade <%= @student.readable_grade %>)
+</p>
+
+
+<table>
+  <tr>
+    <td>Current rating:</td>
+    <td><%= @student.rating %></td>
+  </tr>
+  <tr>
+    <td>This years rating change:</td>
+    <td><%= @student.delta_rating_term(@term) %></td>
+  </tr>
+  <tr>
+    <td>Latest rating change:</td>
+    <td><%= @student.delta_rating_latest %></td>
+  </tr>
+</table>
+
+
+<p>
+  <em>Groups:</em>
+  <% @student.groups.each do |group| %>
+      <%= render :partial => 'groups/group', :locals => {:group => group} %>
+  <% end %>
+</p>
+
+
+<table class="tablesorter">
+  <thead>
+  <tr>
+    <th>Event</th>
+    <th>Date</th>
+    <th>Rating before</th>
+    <th>Rating after</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @players.each do |player| %>
+      <tr>
+        <td><%= player.event ? player.event.name : "No Event" %></td>
+        <td><%= player.event ? player.date_string : "" %></td>
+        <td><%= player.rating %></td>
+        <td><%= player.adjustedRating %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>

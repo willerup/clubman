@@ -1,0 +1,39 @@
+<h1>Listing users</h1>
+
+<table id="UserList" class="tablesorter">
+  <thead>
+  <tr>
+    <th>Coach</th>
+    <th>Admin</th>
+    <th>Club</th>
+    <th>Login</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.coach ? "x" : "" %></td>
+        <td><%= user.admin ? "x" : "" %></td>
+        <td><%= user.club ? user.club.name : "-" %></td>
+        <td><%= user.login %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone %></td>
+        <td>
+          <%= link_to 'Show', user %>
+          <%= link_to 'Edit', edit_user_path(user) %>
+          <%= link_to 'X', user, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br/>
+
+<%= link_to 'New User', new_user_path %>

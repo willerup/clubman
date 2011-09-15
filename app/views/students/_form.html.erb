@@ -1,0 +1,62 @@
+<% @grade_list = [['Kindergarden', 0], ['1st', 1], ['2nd', 2], ['3rd', 3], ['4th', 4], ['5th', 5], ['6th', 6]] %>
+
+<% if !@student.id %>
+	<p>
+		<%= collection_select :previous_student, :id, @students, :id, :fullname, 
+			options = {
+				:prompt => "-Select previous student-", 
+				:class => 'previous_student'
+			} %>
+	</p>
+<% end %>
+ 
+
+<%= form_for(@student) do |f| %>
+
+		<%= f.hidden_field :club_id %>
+
+    <div class="field">
+      <%= f.label :firstname %>
+      <br/>
+      <%= f.text_field :firstname %>
+    </div>
+
+    <div class="field">
+      <%= f.label :lastname %>
+      <br/>
+      <%= f.text_field :lastname %>
+    </div>
+
+    <div class="field">
+      <%= collection_select :family, :id, @families, :id, :name, options = {:prompt => "-Select a Family-", :class => "family"} %>
+    </div>
+
+    <div class="field">
+      <%= f.label :grade %>
+      <%= f.select :grade, options_for_select(@grade_list) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :rating %>
+      <%= f.text_field :rating %>
+      (leave blank to set rating to grade level)
+    </div>
+
+    <div class="field">
+      <% @groups.each do |group| %>
+			<span class="group">
+			    <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
+              <%= group.name %>
+			</span>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :active %>
+      <%= f.label :active %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

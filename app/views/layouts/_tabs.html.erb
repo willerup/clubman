@@ -1,0 +1,23 @@
+<div id="tabs">
+  <ul>
+    <% if is_admin? %>
+        <li class="AdminTab"><%= link_to "Clubs", :controller => "clubs" %></li>
+    <% end %>
+
+    <% if is_coach? %>
+				<li class="CoachTab"><%= link_to "Terms", :controller => "terms" %>
+        <li class="CoachTab"><%= link_to "Parents", :controller => "users" %></li>
+        <li class="CoachTab"><%= link_to "Students", :controller => "students" %></li>
+        <li class="CoachTab"><%= link_to "Groups", :controller => "groups" %></li>
+        <li class="CoachTab"><%= link_to "Ratings", :controller => "ratings" %></li>
+        <li class="CoachTab"><%= link_to "Events", :controller => "events" %></li>
+    <% end %>
+
+    <% if current_user && current_user.family %>
+        <!--
+		<li class="UserTab"><%= link_to "Account", :controller => "account" %></li>
+		-->
+    <% end %>
+  </ul>
+  <div class="clear"></div>
+</div>

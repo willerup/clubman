@@ -1,0 +1,47 @@
+<table id="<%= active ? "active" : "inactive" %>" class="tablesorter StudentList">
+  <thead>
+  <tr>
+    <th><a href="#" class="EmailAll">all</a> <a href="#" class="EmailNone">none</a></th>
+    <th>Groups</th>
+    <th>Name</th>
+    <th>Grade</th>
+    <th>Family</th>
+    <th>Email</th>
+    <th>Last Rating</th>
+    <th>Phone</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% students.each do |student| %>
+      <% group_styles = student.groups.map { |g| "StudentGroup-#{g.id}" } %>
+      <tr data-student-id="<%= student.id %>" class="<%= student.active ? "active selected" : "inactive" %> <%= group_styles.join(' ') %> ">
+        <td class="center">
+          <span class="selection">&nbsp;</span>
+        </td>
+        <td class="center">
+          <% student.groups.each do |group| %>
+              <%= render :partial => 'groups/group', :locals => {:group => group} %>
+          <% end %>
+        </td>
+        <td><%= link_to student.fullname, student %></td>
+        <td><%= student.readable_grade %></td>
+        <td><%= student.family.name %></td>
+        <td>
+          <span class="email">
+            <%= student.family.email_trimmed %>
+          </span>
+        </td>
+        <td>
+          <%= student.current_rating ? student.current_player.date.strftime('%Y-%m-%d') : "" %>
+        </td>
+        <td><%= student.family.phone %></td>
+        <td>
+          <%= link_to 'Add Parent', new_parent_path(student.family) %>
+          <%= link_to 'remove', student, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

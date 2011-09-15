@@ -1,0 +1,23 @@
+<table id="Pairings" class="tablesorter">
+  <thead>
+  <tr>
+    <th>White</th>
+    <th>Black</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <% @pairings.each do |pairing| %>
+      <tr>
+        <td>
+          <%= pairing[0].fullname %>
+        </td>
+        <td>
+          <%= pairing[1].fullname if pairing[0] != pairing[1] %>
+        </td>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>

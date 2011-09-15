@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  account_type: credit
+  family_id: 1
+
+two:
+  name: MyString
+  account_type: debit
+  family_id: 1
