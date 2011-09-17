@@ -61,6 +61,7 @@ class StudentsController < ApplicationController
     if params[:add_to_term] && !@student.terms.include?(current_term)
       @student.terms << current_term
       @student.players << Player.create(:date => Time.now, :rating => @student.rating, :delta => 0, :event => current_term.start_event)
+      @student.save
     end
   end
 
@@ -84,8 +85,10 @@ class StudentsController < ApplicationController
     
     respond_to do |format|
       if @student.save
-        @student.players << Player.create(:date => Time.now, :rating => @student.rating, :delta => 0, :event => current_term.start_event)
+        @student.players << 
+          Player.create(:date => Time.now, :rating => @student.rating, :delta => 0, :event => current_term.start_event)
         @student.terms << current_term
+        @student.save
         
         format.html { redirect_to(@student, :notice => 'Student was successfully created.') }
         format.xml  { render :xml => @student, :status => :created, :location => @student }
