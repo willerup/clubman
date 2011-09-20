@@ -1,4 +1,7 @@
 class FamiliesController < ApplicationController
+  
+  before_filter :require_admin
+  
   # GET /families
   # GET /families.xml
   def index

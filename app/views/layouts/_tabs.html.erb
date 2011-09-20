@@ -1,14 +1,17 @@
 <div id="tabs">
   <ul>
-    <% if is_admin? %>
+    <% if is_god? %>
         <li class="AdminTab"><%= link_to "Clubs", :controller => "clubs" %></li>
     <% end %>
 
+    <% if is_admin? %>
+		<li class="CoachTab"><%= link_to "Terms", :controller => "terms" %></li>
+		<li class="CoachTab"><%= link_to "Products", :controller => "products" %></li>
+	    <li class="CoachTab"><%= link_to "Users", :controller => "users" %></li>
+	    <li class="CoachTab"><%= link_to "Families", :controller => "families" %></li>
+    <% end %>
+
     <% if is_coach? %>
-	<li class="CoachTab"><%= link_to "Terms", :controller => "terms" %></li>
-	<li class="CoachTab"><%= link_to "Products", :controller => "products" %></li>
-    <li class="CoachTab"><%= link_to "Users", :controller => "users" %></li>
-    <li class="CoachTab"><%= link_to "Families", :controller => "families" %></li>
         <li class="CoachTab"><%= link_to "Students", :controller => "students" %></li>
         <li class="CoachTab"><%= link_to "Groups", :controller => "groups" %></li>
         <li class="CoachTab"><%= link_to "Ratings", :controller => "ratings" %></li>

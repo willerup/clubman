@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_admin?
   helper_method :is_coach?
+  helper_method :is_god?
 
 
   private
@@ -36,7 +37,11 @@ class ApplicationController < ActionController::Base
   def is_coach?
     current_user && current_user.coach
   end
-
+  
+  def is_god?
+    current_user && current_user.god
+  end
+  
   def require_user
     unless current_user
       store_location
@@ -72,6 +77,15 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  
+  def require_god
+      unless current_user && current_user.god
+        store_location
+        flash[:notice] = "You must be logged in with coach privileges to access this page"
+        redirect_to new_user_session_url
+        return false
+      end
+    end
   
   def require_no_user
     if current_user

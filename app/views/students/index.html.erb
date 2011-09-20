@@ -1,6 +1,9 @@
 
 <h1>Students</h1>
+
+<% if is_admin? %>
 <%= link_to 'New Student', new_student_path %>
+<% end %>
 
 <p>
   <b>Selected:</b>

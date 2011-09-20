@@ -35,8 +35,16 @@ $(document).ready(function() {
     });
 
     $('.GroupSelect').change(function() {
-        var groupId = $(this).attr('data-group-id');
-        $('.StudentGroup-' + groupId).toggle($(this).checked);
+				var groups = $('.GroupSelect:checked').map(function() {
+					return 'StudentGroup-' + $(this).attr('data-group-id');
+				});
+				$('.StudentList tbody tr').each(function() {
+					var show = false;
+					for (var i = 0; i < groups.length; i++) {
+						if ($(this).hasClass(groups[i])) show = true;
+					}
+					$(this).toggle(show);
+				});
     });
 
     $('.EmailNone').click(function() {

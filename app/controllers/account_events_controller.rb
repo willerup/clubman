@@ -1,6 +1,6 @@
 class AccountEventsController < ApplicationController
 
-  before_filter :require_coach
+  before_filter :require_admin
 
 
   def purchase

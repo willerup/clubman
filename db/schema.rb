@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920033802) do
+ActiveRecord::Schema.define(:version => 20110920180324) do
 
   create_table "account_events", :force => true do |t|
     t.integer  "debit_id"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(:version => 20110920033802) do
     t.integer  "group_id"
     t.string   "perishable_token"
     t.integer  "club_id"
+    t.boolean  "god"
   end
 
 end

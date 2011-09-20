@@ -1,6 +1,6 @@
 class TermsController < ApplicationController
   
-  before_filter :require_coach
+  before_filter :require_admin
   
   
   

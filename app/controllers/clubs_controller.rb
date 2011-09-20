@@ -1,6 +1,6 @@
 class ClubsController < ApplicationController
 
-  before_filter :require_admin
+  before_filter :require_god
 
 
   # GET /clubs

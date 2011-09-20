@@ -36,8 +36,9 @@
 <p>Phone: <%= @family.phone %></p>	
 <p>Note:<%= @family.notes %></p>
 
-	<%= link_to 'edit', edit_family_path(@family) %>
 
+<% if is_admin? %>
+	<%= link_to 'edit', edit_family_path(@family) %>
 
 	<p>
 	Add products: 
@@ -52,6 +53,8 @@
 	Pay: <input type="text" id="amount" /> <a href="#" data-student="<%= @student.id %>" id="pay">pay</a>
 	</p>
 	
+<% end %>	
+
 
 <h2>Games</h2>
 <table class="tablesorter">
@@ -75,6 +78,8 @@
   </tbody>
 </table>
 
-
+<% if is_admin? %>
 <%= link_to 'Edit', edit_student_path(@student) %> |
+<% end %>
+
 <%= link_to 'Back', students_path %>
