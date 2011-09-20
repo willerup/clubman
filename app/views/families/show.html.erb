@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @family.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @family.email %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @family.phone %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @family.notes %>
+</p>
+
+<%= render(:partial => 'accounts/show', :locals => {:account => @family.account}) %>
+
+
+<%= link_to 'Edit', edit_family_path(@family) %> |
+<%= link_to 'Back', families_path %>

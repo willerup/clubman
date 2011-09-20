@@ -1,6 +1,11 @@
 class Account < ActiveRecord::Base
-  has_one :family  
-  belongs_to :parent, :class_name => "Account", :foreign_key => "parent_id"
+  belongs_to :family  
+  belongs_to :club
+  
+  LIABILITY = "liability"
+  INCOME = "income"
+  CASH = "cash"
+  EXPENSE = "expense"
   
   
   def is(account_type)
@@ -8,42 +13,50 @@ class Account < ActiveRecord::Base
   end
   
   def credits
-    AccountEvent.all(:conditions => ["credit_id = ? ", id])
+    AccountEvent.all(:conditions => ["credit_id = ? ", self.id])
   end
   
   def debits
-    AccountEvent.all(:conditions => ["debit_id = ? ", id])
+    AccountEvent.all(:conditions => ["debit_id = ? ", self.id])
+  end
+  
+  def events
+    AccountEvent.where("debit_id = ? OR credit_id = ?", self.id, self.id).order(:date)
   end
   
   def total
-    creditTotal = credits.sum(&:amount)
-    debitTotal = debits.sum(&:amount)
+    creditTotal = self.credits.sum(&:amount)
+    debitTotal = self.debits.sum(&:amount)
     sum = debitTotal - creditTotal
-    sum = -sum if creditIncreases
+    sum = -sum if self.creditIncreases
     return sum
   end
   
   def creditIncreases
-    account_type == :income || account_type == :liability
+    self.account_type == INCOME || self.account_type == LIABILITY
+  end
+
+  def self.student_buy(student, product, date)
+    AccountEvent.create(
+      :product => product,
+      :student => student,
+      :date => date, :amount => product.price, 
+      :credit_note => "#{product.name} for #{student.fullname}",
+      :credit => student.club.income,
+      :debit_note => "#{product.name} for #{student.firstname}",
+      :debit => student.family.account
+      )
+  end
+  
+  def self.family_pay(family, amount, date)
+      AccountEvent.create(
+        :date => date, :amount => amount, 
+        :credit_note => "Paid",
+        :credit => family.account,
+        :debit_note => "Paid by #{family.name}",
+        :debit => family.club.cash,
+        )
   end
 end
 
 
-=begin
-
-
-
-
-
-Budget Only Assets Liabilities Net Assets Revenues Expenses Special Accts
-Increase would be a positive number, decrease would be a negative number Increase would be a negative number, decrease would be a positive number Increase would be a negative number, decrease would be a positive number
-Normal balance will show
-as a positive number
-0010-0035, 5500 1000-1999 2000-2999 3000-3999 4000-4899 4900-8999 9000-9999
-increase = debit increase = debit increase = credit increase = credit increase = credit increase = debit increase = credit (9250)
-decrease = credit decrease = credit decrease = debit decrease = debit (9260) decrease = debit decrease = credit decrease = debit (9260)
-
-
-
-
-=end

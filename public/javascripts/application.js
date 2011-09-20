@@ -110,4 +110,11 @@ $(document).ready(function() {
         var student = $(this).val();
         document.location = root + "students/edit/" + student + "?add_to_term=true";      
     });
+
+		$('#pay').click(function() {
+			var amount = $('#amount').val() * 100;
+			var student = $(this).attr('data-student');
+			document.location = root + "account_events/payment/" + student + "?amount=" + amount;
+			return false;
+		});
 });

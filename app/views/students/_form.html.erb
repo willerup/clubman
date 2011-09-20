@@ -28,12 +28,8 @@
     </div>
 
     <div class="field">
-      <%= collection_select :family, :id, @families, :id, :name, options = {:prompt => "-Select a Family-", :class => "family"} %>
-    </div>
-
-    <div class="field">
       <%= f.label :grade %>
-      <%= f.select :grade, options_for_select(@grade_list) %>
+      <%= f.select :grade, options_for_select(@grade_list, @student.grade) %>
     </div>
 
     <div class="field">
@@ -41,6 +37,28 @@
       <%= f.text_field :rating %>
       (leave blank to set rating to grade level)
     </div>
+
+	<% if @family.nil? %>
+
+	<hr />
+
+	<p>Family</p>
+    <div class="field">
+      	<%= collection_select :family, :id, @families, :id, :name, options = {:prompt => "-Select a Family-", :class => "family"} %>
+    </div>
+
+    <div class="field">
+      Name: <%= text_field_tag 'family[name]', '', :size => 80 %>
+    </div>
+    <div class="field">
+      Email: <%= text_field_tag 'family[email]', '', :size => 80 %>
+    </div>
+    <div class="field">
+      Phone: <%= text_field_tag 'family[phone]', '', :size => 80 %>
+    </div>
+	<% end %>
+
+	<hr/>
 
     <div class="field">
       <% @groups.each do |group| %>

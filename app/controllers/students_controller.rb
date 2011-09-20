@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
 
   before_filter :require_coach
   
-
+  
   def pairings
     ids = params[:id].split(',')
     @students = Student.find_by_ids(ids)
@@ -30,6 +30,7 @@ class StudentsController < ApplicationController
     @family = @student.family
     @players = @student.players_in_term(current_term)
     @term = current_term
+    @products = Product.all_by_club(current_club)
     
     respond_to do |format|
       format.html # show.html.erb
@@ -41,7 +42,7 @@ class StudentsController < ApplicationController
   def new
     @students = current_club.students - current_term.students
     @student = Student.new(:active => true, :club => current_club)
-    @families = Family.all
+    @families = Family.all_by_club(current_club)
     @family = nil
     @groups = Group.all_by_term(current_term)
 
@@ -68,17 +69,26 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(params[:student])
-    if params[:family][:id] != ""
+
+    if !@student.family && params[:family][:id] != ""
       @student.family = Family.find(params[:family][:id])
-    end
-     
-    if !@student.family
-      @student.family = Family.find_by_name(@student.lastname)
-      if !@student.family
-        @student.family = Family.create(:name => @student.lastname)
+    else
+      if params[:family][:name] != ""
+        @student.family = Family.create(params[:family])
+        @student.family.club = current_club
+      else
+        @student.family = Family.find_by_name(@student.lastname)
+        if !@student.family
+          @student.family = Family.create(:name => @student.lastname, :club => current_club)
+        end
       end
     end
-
+    
+    if !@student.family.account
+      account = Account.create(:name => @student.family.name, :account_type => Account::CASH, :family => @student.family, :club => current_club)
+      @student.family.account = account
+    end
+    
     if !@student.rating && @student.grade
       @student.set_rating_by_grade
     end
@@ -102,15 +112,15 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
-    if params[:family][:id] != ""
+    
+    if !@student.family && params[:family][:id] != ""
       @student.family = Family.find(params[:family][:id])
     end
-    
-    if !@student.family
+    if !@student.family 
       @student.family = Family.find_by_name(@student.lastname)
-      if !@student.family
-        @student.family = Family.create(:name => @student.lastname)
-      end
+    end
+    if !@student.family
+      @student.family = Family.create(:name => @student.lastname)
     end
 
     respond_to do |format|

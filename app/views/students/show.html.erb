@@ -25,12 +25,35 @@
 
 <p>
   <em>Groups:</em>
-  <% @student.groups.each do |group| %>
+  <% @student.groups_by_term(@term).each do |group| %>
       <%= render :partial => 'groups/group', :locals => {:group => group} %>
   <% end %>
 </p>
 
+<h2>Family</h2>
+<p>Family: <%= @family.name %></p>
+<p>Email: <%= @family.email %></p>
+<p>Phone: <%= @family.phone %></p>	
+<p>Note:<%= @family.notes %></p>
 
+	<%= link_to 'edit', edit_family_path(@family) %>
+
+
+	<p>
+	Add products: 
+	<% @products.each do |product| %>
+		<%= link_to product.name, :controller => "account_events", 
+			:action => "purchase", :id => @student, :product => product %> 	
+	<% end %>
+	</p>
+<%= render(:partial => 'accounts/show', :locals => {:account => @student.family.account}) %>
+
+<p>
+	Pay: <input type="text" id="amount" /> <a href="#" data-student="<%= @student.id %>" id="pay">pay</a>
+	</p>
+	
+
+<h2>Games</h2>
 <table class="tablesorter">
   <thead>
   <tr>

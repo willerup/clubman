@@ -15,13 +15,13 @@
 
   <tbody>
   <% students.each do |student| %>
-      <% group_styles = student.groups.map { |g| "StudentGroup-#{g.id}" } %>
+      <% group_styles = student.groups_by_term(student.club.term).map { |g| "StudentGroup-#{g.id}" } %>
       <tr data-student-id="<%= student.id %>" class="<%= student.active ? "active selected" : "inactive" %> <%= group_styles.join(' ') %> ">
         <td class="center">
           <span class="selection">&nbsp;</span>
         </td>
         <td class="center">
-          <% student.groups.each do |group| %>
+          <% student.groups_by_term(student.club.term).each do |group| %>
               <%= render :partial => 'groups/group', :locals => {:group => group} %>
           <% end %>
         </td>
@@ -38,7 +38,6 @@
         </td>
         <td><%= student.family.phone %></td>
         <td>
-          <%= link_to 'Add Parent', new_parent_path(student.family) %>
           <%= link_to 'remove', student, :confirm => 'Are you sure?', :method => :delete %>
         </td>
       </tr>

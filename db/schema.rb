@@ -10,16 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110917053204) do
+ActiveRecord::Schema.define(:version => 20110920033802) do
 
   create_table "account_events", :force => true do |t|
     t.integer  "debit_id"
     t.integer  "credit_id"
-    t.string   "description"
     t.datetime "date"
     t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
+    t.integer  "student_id"
+    t.string   "credit_note"
+    t.string   "debit_note"
   end
 
   create_table "accounts", :force => true do |t|
@@ -27,8 +30,8 @@ ActiveRecord::Schema.define(:version => 20110917053204) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "account_type"
-    t.integer  "parent_id"
     t.integer  "family_id"
+    t.integer  "club_id"
   end
 
   create_table "clubs", :force => true do |t|
@@ -37,6 +40,10 @@ ActiveRecord::Schema.define(:version => 20110917053204) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "term_id"
+    t.integer  "income_id"
+    t.integer  "expenses_id"
+    t.integer  "cash_id"
+    t.integer  "liabilities_id"
   end
 
   create_table "events", :force => true do |t|
@@ -91,6 +98,14 @@ ActiveRecord::Schema.define(:version => 20110917053204) do
     t.datetime "updated_at"
     t.integer  "event_id"
     t.integer  "delta"
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "club_id"
   end
 
   create_table "students", :force => true do |t|

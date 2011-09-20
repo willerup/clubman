@@ -5,10 +5,13 @@ class Student < ActiveRecord::Base
   has_and_belongs_to_many :terms
   has_many :players
   has_many :events, :through => :players
+  has_many :account_events
 
   #validates :family, :presence => true
 
-
+  def groups_by_term(term)
+    groups.where('term_id = ?', term)
+  end
 
   def self.find_all(term)
     term.students.order('firstname,lastname')

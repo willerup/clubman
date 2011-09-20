@@ -15,7 +15,7 @@
   <% end %>  
 </div>
 
-<h2>Active Students</h2>
+<h2>Active Students (<%= @active_students.size %>)</h2>
 <%= render(:partial => 'students', :locals => {:students => @active_students, :active => true}) %>
 
 <h2>Inactive Students</h2>

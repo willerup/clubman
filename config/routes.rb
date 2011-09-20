@@ -14,6 +14,8 @@ Clubmanager::Application.routes.draw do
   resources :user_sessions
   resources :events
   resources :terms
+  resources :products
+  resources :accounts
   
   match 'login', :to => 'user_sessions#new'
   match 'logout', :to => 'user_sessions#destroy'

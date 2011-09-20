@@ -1,0 +1,30 @@
+
+<table class="tablesorter">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Notes</th>
+    <th>Due</th>
+    <th>Paid</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% account.events.each do |event| %>
+      <tr>
+        <td><%= event.date %></td>
+		<% if event.debit_id == account.id %>
+			<td><%= event.debit_note %></td>
+			<td><%= event.amount / 100 %></td>
+			<td></td>
+		<% else %>
+			<td><%= event.credit_note %></td>
+			<td></td>
+			<td><%= event.amount / 100 %></td>
+		<% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>Total: <b> <%= account.total / 100 %> </b></p>

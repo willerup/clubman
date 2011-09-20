@@ -18,7 +18,7 @@
         <td class="center"><%= student.readable_grade %></td>
         <td class="center"><%= student.current_rating_as_string %></td>
         <td class="center"><%= student.delta_rating_latest %></td>
-        <td class="center"><%= student.delta_rating_year %></td>
+        <td class="center"><%= student.delta_rating_term(@term) %></td>
         <td class="center"><%= student.current_rating ? student.current_player.date.strftime('%Y-%m-%d') : "" %></td>
        </tr>
   <% end %>

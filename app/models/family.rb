@@ -7,4 +7,9 @@ class Family < ActiveRecord::Base
   def email_trimmed
     email.strip if email
   end
+  
+  def self.all_by_club(club)
+    club.families.order(:name)
+  end
+  
 end
