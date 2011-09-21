@@ -35,6 +35,17 @@
     <%= f.label :phone %><br />
     <%= f.text_field :phone %>
   </div>
+
+	<% if is_admin? %>
+	<div class="field">
+		<%= f.label :coach %>
+		<%= f.check_box :coach %>
+		</div>
+		<div class="field">
+			<%= f.label :admin %>
+			<%= f.check_box :admin %>
+			</div>
+	<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

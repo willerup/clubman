@@ -21,7 +21,7 @@ test:
 production:
     adapter: mysql
     database: clubmanager
-    username: willerup
-    password: myql4fun
+    username: 
+    password: 
     socket: /var/run/mysqld/mysqld.sock
 

@@ -2,6 +2,7 @@
   <thead>
   <tr>
     <th><a href="#" class="EmailAll">all</a> <a href="#" class="EmailNone">none</a></th>
+	<th>New</th>
     <th>Groups</th>
     <th>Name</th>
     <th>Grade</th>
@@ -20,6 +21,9 @@
         <td class="center">
           <span class="selection">&nbsp;</span>
         </td>
+		<td>
+			<%= student.terms.size == 1 ? "new" : ""%>
+		</td>
         <td class="center">
           <% student.groups_by_term(student.club.term).each do |group| %>
               <%= render :partial => 'groups/group', :locals => {:group => group} %>
@@ -38,7 +42,10 @@
         </td>
         <td><%= student.family.phone %></td>
         <td>
+	<% if is_admin? %>
+		<%= link_to 'edit', edit_student_path(student) %>
           <%= link_to 'remove', student, :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
         </td>
       </tr>
   <% end %>

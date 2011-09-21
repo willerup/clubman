@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
 
+  before_filter :require_admin, :only => ['destroy', 'create', 'new']
   before_filter :require_coach
   
   

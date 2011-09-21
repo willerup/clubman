@@ -31,10 +31,13 @@
 
     <div id="user_nav">
       <% if current_user %>Hi <%= current_user.login %> -
-          <%= link_to "Edit Profile", edit_user_path(:current) %> |
+          <%= link_to "Edit Profile", edit_user_path(current_user) %> |
           <%= link_to "Logout", logout_path %>
       <% else %>
-          <%= link_to "Register", new_user_path %> | <%= link_to "Login", login_path %>
+<!-- 
+          <%= link_to "Register", new_user_path %> | 
+-->
+		<%= link_to "Login", login_path %>
       <% end %>
     </div>
 

@@ -30,16 +30,16 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.record
   end
   
-  def is_admin?
-    current_user && current_user.admin
-  end
-
   def is_coach?
-    current_user && current_user.coach
+    current_user && (current_user.coach || is_admin?)
   end
   
+  def is_admin?
+    current_user && (current_user.admin || is_god?)
+  end
+
   def is_god?
-    current_user && current_user.god
+    current_user && (current_user.god)
   end
   
   def require_user
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    unless current_user && current_user.admin
+    unless is_admin?
       store_location
       flash[:notice] = "You must be logged in with admin priviledges to access this page"
       redirect_to new_user_session_url
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_coach
-    unless current_user && current_user.coach
+    unless is_coach?
       store_location
       flash[:notice] = "You must be logged in with coach privileges to access this page"
       redirect_to new_user_session_url
@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_god
-      unless current_user && current_user.god
+      unless is_god?
         store_location
         flash[:notice] = "You must be logged in with coach privileges to access this page"
         redirect_to new_user_session_url

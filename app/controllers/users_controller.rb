@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :require_user, :except => ['new', 'create']
-  before_filter :require_coach, :only => ['index', 'show', 'destroy']
-  before_filter :require_no_user, :only => ['new']
+  before_filter :require_admin, :except => ['edit']
+  before_filter :require_user, :only => ['edit', 'update']
 
 
   def index
@@ -42,7 +41,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-
+    @user.club = current_club
+    
     respond_to do |format|
       if @user.save
         format.html { redirect_to(root_url, :notice => 'Registration successful.') }

@@ -45,6 +45,7 @@ $(document).ready(function() {
 					}
 					$(this).toggle(show);
 				});
+				$('#count').text($('.StudentList tbody tr:visible').size());
     });
 
     $('.EmailNone').click(function() {
