@@ -1,16 +1,16 @@
 <table id="<%= active ? "active" : "inactive" %>" class="tablesorter StudentList">
   <thead>
   <tr>
-    <th><a href="#" class="EmailAll">all</a> <a href="#" class="EmailNone">none</a></th>
+    <th class="ColumnSelect"><a href="#" class="EmailAll">all</a> <a href="#" class="EmailNone">none</a></th>
 	<th>New</th>
     <th>Groups</th>
     <th>Name</th>
     <th>Grade</th>
-    <th>Family</th>
-    <th>Email</th>
+    <th class="ColumnFamily">Family</th>
+    <th class="ColumnEmail">Email</th>
     <th>Last Rating</th>
     <th>Phone</th>
-    <th></th>
+    <th class="ColumnActions"></th>
   </tr>
   </thead>
 
@@ -18,12 +18,12 @@
   <% students.each do |student| %>
       <% group_styles = student.groups_by_term(student.club.term).map { |g| "StudentGroup-#{g.id}" } %>
       <tr data-student-id="<%= student.id %>" class="<%= student.active ? "active selected" : "inactive" %> <%= group_styles.join(' ') %> ">
-        <td class="center">
+        <td class="center ColumnSelect">
           <span class="selection">&nbsp;</span>
         </td>
-		<td>
-			<%= student.terms.size == 1 ? "new" : ""%>
-		</td>
+    		<td>
+    			<%= student.terms.size == 1 ? "new" : ""%>
+    		</td>
         <td class="center">
           <% student.groups_by_term(student.club.term).each do |group| %>
               <%= render :partial => 'groups/group', :locals => {:group => group} %>
@@ -31,8 +31,8 @@
         </td>
         <td><%= link_to student.fullname, student %></td>
         <td><%= student.readable_grade %></td>
-        <td><%= student.family.name %></td>
-        <td>
+        <td class="ColumnFamily"><%= student.family.name %></td>
+        <td class="ColumnEmail">
           <span class="email">
             <%= student.family.email_trimmed %>
           </span>
@@ -41,7 +41,7 @@
           <%= student.current_rating ? student.current_player.date_string : "" %>
         </td>
         <td><%= student.family.phone %></td>
-        <td>
+        <td class="ColumnActions">
 	<% if is_admin? %>
 		<%= link_to 'edit', edit_student_path(student) %>
           <%= link_to 'remove', student, :confirm => 'Are you sure?', :method => :delete %>

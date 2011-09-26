@@ -23,6 +23,10 @@ class StudentsController < ApplicationController
     end
   end
 
+  def print
+    @students = Student.all_active(current_term)
+    render :layout => "layouts/print"
+  end
 
   def show
     @student = Student.find(params[:id])

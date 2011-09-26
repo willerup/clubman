@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="user-scalable=yes"/>
+
+  <title>
+    Club Manager
+  </title>
+
+  <%= stylesheet_link_tag 'ui-lightness/jquery-ui-1.8.5.custom' %>
+  <%= stylesheet_link_tag 'blue/style' %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'print' %>
+
+  <%= javascript_include_tag 'jquery-1.4.2.min' %>
+  <%= javascript_include_tag 'jquery-ui-1.8.5.custom.min' %>
+  <%= javascript_include_tag 'jquery.tablesorter.min.js' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+
+<body id="home">
+<div id="container">
+  <div id="header">
+    <div id="logo">
+      <img src="/images/pieces.png" />
+      <h1>
+        <%= current_club ? current_club.name : "Chess Club Manager" %>
+      </h1>
+    </div>
+  </div>
+  <div id="main">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

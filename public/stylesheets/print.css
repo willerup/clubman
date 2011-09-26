@@ -1,0 +1,7 @@
+.ColumnSelect,
+.ColumnEmail,
+.ColumnFamily,
+.ColumnAction
+{
+  display: none;
+}
