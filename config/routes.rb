@@ -20,6 +20,8 @@ Clubmanager::Application.routes.draw do
   match 'login', :to => 'user_sessions#new'
   match 'logout', :to => 'user_sessions#destroy'
 
+  match 'students/print', :to => 'students#print'
+
   match 'new_parent.:id', :to => 'families#new_parent', :as => :new_parent
 #  match 'games/new_player', :to => 'games#new_player', :as => :new_player
 
