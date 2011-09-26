@@ -92,6 +92,7 @@ class StudentsController < ApplicationController
     if !@student.family.account
       account = Account.create(:name => @student.family.name, :account_type => Account::CASH, :family => @student.family, :club => current_club)
       @student.family.account = account
+      @student.family.save
     end
     
     if !@student.rating && @student.grade
