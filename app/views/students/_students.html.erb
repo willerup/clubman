@@ -29,9 +29,11 @@
               <%= render :partial => 'groups/group', :locals => {:group => group} %>
           <% end %>
         </td>
-        <td><%= link_to student.fullname, student %></td>
+        <td><%= link_to student.firstname, student %></td>
         <td><%= student.readable_grade %></td>
-        <td class="ColumnFamily"><%= student.family.name %></td>
+        <td class="ColumnFamily">
+			<%= link_to student.family.name, student.family %>
+		</td>
         <td class="ColumnEmail">
           <span class="email">
             <%= student.family.email_trimmed %>
