@@ -36,6 +36,9 @@ class Student < ActiveRecord::Base
     Student.all(:conditions => [conditions])
   end
 
+  def in_current_term
+    !self.terms.index(self.club.term).nil?
+  end
 
   def current_player
     Player.first(:conditions => ['student_id = ?', self.id], :order => 'date DESC')

@@ -17,6 +17,17 @@
     <td><%= family.name %></td>
     <td><%= family.email %></td>
     <td><%= family.phone %></td>
+	<td>
+		<% family.students.each do |student| %>
+			<p class="compact">
+				<% if student.active && student.in_current_term %>
+					<%= link_to student.firstname, student_path(student) %>
+				<% else %>
+					<%= student.firstname %>
+				<% end %>
+			</p>
+		<% end %>
+	</td>
     <td><%= family.notes %></td>
 	<td><%= -family.account.total / 100 %></td>
     <td><%= link_to 'Show', family %></td>
