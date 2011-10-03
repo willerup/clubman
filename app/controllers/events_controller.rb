@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     Game.create(:event => @event, :result => params[:game][:result],
                 :player1 => @player1, :player2 => @player2)
 
-    @students = Student.all_active
+    @students = Student.all_active(current_term)
     @game = Game.new(:event => @event, :result => 1)
 
     render :action => "edit"
