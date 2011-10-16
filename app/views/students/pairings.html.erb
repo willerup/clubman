@@ -1,20 +1,18 @@
-<table id="Pairings" class="tablesorter">
-  <thead>
-  <tr>
-    <th>White</th>
-    <th>Black</th>
-  </tr>
-  </thead>
-
+<table id="Pairings" class="pairings">
   <tbody>
 
   <% @pairings.each do |pairing| %>
       <tr>
-        <td>
+        <td class="white">
+		  <%= image_tag "white.png", :valign => 'middle' %>
           <%= pairing[0].fullname %>
         </td>
-        <td>
+		<td class="middle">
+			-
+		</td>
+        <td class="black">
           <%= pairing[1].fullname if pairing[0] != pairing[1] %>
+		  <%= image_tag "black.png", :valign => 'middle' %>
         </td>
       </tr>
   <% end %>

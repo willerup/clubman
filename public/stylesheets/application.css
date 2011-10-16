@@ -180,4 +180,28 @@ h1 {
     background-image: url("../images/checked.png");
 }
 
+/* Pairings table */
+
+.pairings {
+	width: 100%;
+	padding: 0;
+}
+
+.pairings td {
+	border-bottom: 1px solid #eee;
+	font-size: 1.2em;
+	padding: 20px;
+}
+
+.pairings .white {
+	text-align: right;
+}
+
+.pairings .black {
+	padding-left: 10px;
+}
+
+.pairings .middle {
+	padding: 0;
+}
 
