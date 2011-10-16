@@ -190,6 +190,7 @@ h1 {
 .pairings td {
 	border-bottom: 1px solid #eee;
 	font-size: 1.2em;
+	font-weight: bold;
 	padding: 20px;
 }
 
