@@ -29,6 +29,7 @@ class Account < ActiveRecord::Base
     debitTotal = self.debits.sum(&:amount)
     sum = debitTotal - creditTotal
     sum = -sum if self.creditIncreases
+    
     return sum
   end
   

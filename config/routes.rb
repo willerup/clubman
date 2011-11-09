@@ -1,5 +1,7 @@
 Clubmanager::Application.routes.draw do
 
+  get "account/index"
+
   get "parent/index"
 
   get "home/index"
