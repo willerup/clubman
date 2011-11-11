@@ -1,0 +1,18 @@
+
+<h2>Income<h2>
+<% @income.each do |account| %>
+<table>
+<%= render :partial => 'summary', :locals => { :account => account }%> 
+<% end %>
+</table>
+
+<h2>Expenses<h2>
+<% @expense.each do |account| %>
+<table>
+<%= render :partial => 'summary', :locals => { :account => account }%> 
+<% end %>
+</table>
+
+
+
+

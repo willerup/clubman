@@ -9,3 +9,40 @@ Account:
 
 
 
+
+ACCOUNTS
+
+Income
+* registrations
+* products
+* events
+* donations
+
+Expenses
+* products
+* teachers
+* events
+* materials
+
+Assets - Cash
+* cash (opening balance)
+* bank (opening balance)
+* receivables
+	* family1
+	* family2
+	...
+
+Liabilities 
+* payable
+
+Equity
+= Assets - Liabilities
+
+
+Registration: K=income/registrations D=liability
+Payment: D=cash K=liability
+Event: +expense -cash | +income +cash
+Bank transaction: +cash -bank | -cash +bank
+Pay teacher cash: +expense -cash
+Teacher performs services: +expense +liability
+Pay teacher check: +expense -bank

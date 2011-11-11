@@ -6,6 +6,7 @@ class Account < ActiveRecord::Base
   INCOME = "income"
   CASH = "cash"
   EXPENSE = "expense"
+  EQUITY = "equity"
   
   
   def is(account_type)
@@ -34,7 +35,7 @@ class Account < ActiveRecord::Base
   end
   
   def creditIncreases
-    self.account_type == INCOME || self.account_type == LIABILITY
+    self.account_type == INCOME || self.account_type == LIABILITY || self.account_type == EQUITY
   end
 
   def self.student_buy(student, product, date)
