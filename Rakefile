@@ -6,5 +6,5 @@ require 'rake'
 
 Clubmanager::Application.load_tasks
 
-  require 'vlad'
-  Vlad.load :scm => :git
+# require 'vlad'
+#  Vlad.load :scm => :git

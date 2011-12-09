@@ -19,12 +19,12 @@ class Student < ActiveRecord::Base
 
 
   def self.all_active(term)
-    term.students.where('active').order('firstname,lastname')
+    term.students.where('active = 1').order('firstname,lastname')
   end
 
 
   def self.all_inactive(term)
-    term.students.where('NOT(active)').order('firstname,lastname')
+    term.students.where('active = 0').order('firstname,lastname')
   end
 
   def players_in_term(term)
